@@ -5,8 +5,8 @@ resource "aws_security_group" "all_worker_mgmt" {
 
 resource "aws_security_group_rule" "all_worker_mgmt_ingress" {
   description       = "allow inbound traffic from eks"
-  from_port         = 0
-  protocol          = "-1"
+  from_port         = 0         # 0 stands for all ports
+  protocol          = "-1"      # -1 stands for all protocols (TCP, UDP, ICMP)
   to_port           = 0
   security_group_id = aws_security_group.all_worker_mgmt.id
   type              = "ingress"
@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "all_worker_mgmt_ingress" {
     "10.0.0.0/8",
     "172.16.0.0/12",
     "192.168.0.0/16",
-  ]
+  ]                             # allows resources to communicate within VPC
 }
 
 resource "aws_security_group_rule" "all_worker_mgmt_egress" {
@@ -24,5 +24,5 @@ resource "aws_security_group_rule" "all_worker_mgmt_egress" {
   security_group_id = aws_security_group.all_worker_mgmt.id
   to_port           = 0
   type              = "egress"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = ["0.0.0.0/0"]         # allows resources to access internet
 }
