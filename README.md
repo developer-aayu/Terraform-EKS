@@ -64,3 +64,7 @@ terraform init
 terraform plan
 terraform apply
 ```
+## create access entry
+
+create the entry access for desired IAM user so that the worker nodes get started
+go to `create access entry` and grant the user `AmazonEKSClusterAdminPolicy` permission and create the access entry
